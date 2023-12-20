@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "./variables.scss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 50px;
+  overflow-x: hidden;
+}
+
+body {
+  // 100;200;300;400;500;600;700;800;900;
+  font-family: 'Urbanist', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: $blue4;
+  transition: 0.15s;
+}
+
+a:hover {
+  color: $blue5;
+}
