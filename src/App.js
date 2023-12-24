@@ -1,10 +1,9 @@
 import './styles/main.scss';
+import Home from './pages/Home';
 
 function App() {
   return (
-    <div className="App">
-      <header className='text-xl font-bold underline'>Test</header>
-    </div>
+    <Home />
   );
 }
 
