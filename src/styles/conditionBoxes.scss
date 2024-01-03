@@ -1,0 +1,31 @@
+@import "./variables.scss";
+
+.conditionBoxes {
+  @apply my-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-2 gap-x-2 gap-y-2;
+
+  .conditionBox {
+    @apply flex flex-col items-center p-4 rounded-[10px];
+    background-color: $darkGrey;
+
+    &__icon {
+      width: 3rem;
+      height: 3rem;
+      object-fit: contain;
+    }
+
+    &__value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0.5rem 0 0 0;
+      color: $white;
+      text-align: center;
+    }
+
+    &__description {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: $white;
+      text-align: center;
+    }
+  }
+}

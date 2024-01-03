@@ -1,0 +1,52 @@
+@import "./variables.scss";
+
+.searchBar {
+  @apply flex;
+
+  &__input {
+    @apply rounded-[10px] py-2 px-2 text-sm flex grow;
+    color: $white;
+    background-color: $darkGrey;
+    outline: none;
+
+    &::placeholder {
+      color: $white;
+    }
+  }
+
+  &__cancel {
+    @apply text-sm ml-2;
+  }
+}
+
+.suggestionBox {
+  @apply absolute w-full text-sm rounded-[10px];
+  color: $black;
+  background-color: $milk;
+  top: calc(100% + 1rem);
+
+  &__list {
+
+    &__item {
+      @apply py-2 px-2;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $blue;
+        color: white;
+
+        &:first-child {
+          border-radius: 10px 10px 0 0;
+        }
+
+        &:last-child {
+          border-radius: 0 0 10px 10px;
+        }
+      }
+    }
+
+    &__noResults {
+      @apply py-2 px-2 block;
+    }
+  }
+}

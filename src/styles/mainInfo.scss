@@ -1,0 +1,36 @@
+@import "./variables.scss";
+
+.mainInfo {
+  @apply my-8 items-center grid grid-cols-1 lg:grid-cols-2;
+
+  &__city {
+    @apply text-3xl md:text-6xl;
+    font-weight: 700;
+    color: $white;
+  }
+
+  &__conditions {
+    @apply text-lg lg:mb-10;
+    font-weight: 500;
+    color: $white;
+  }
+
+  &__temp {
+    @apply text-5xl md:text-7xl;
+    font-weight: 700;
+    color: $white;
+  }
+
+  &__feelsLike {
+    @apply text-lg mt-2;
+    font-weight: 500;
+    color: $white;
+  }
+
+  &__icon {
+    @apply h-32 md:h-[12rem];
+    width: auto;
+    object-fit: contain;
+    margin: 2rem 0;
+  }
+}

@@ -21,14 +21,15 @@ html {
 body {
   // 100;200;300;400;500;600;700;800;900;
   font-family: 'Urbanist', sans-serif;
+  background-color: $black;
 }
 
 a {
   text-decoration: none;
-  color: $blue4;
+  color: $darkBlue;
   transition: 0.15s;
 }
 
 a:hover {
-  color: $blue5;
+  color: $blue;
 }
