@@ -8,6 +8,7 @@
     color: $white;
     background-color: $darkGrey;
     outline: none;
+    padding-right: 5rem;
 
     &::placeholder {
       color: $white;
@@ -15,7 +16,7 @@
   }
 
   &__cancel {
-    @apply text-sm ml-2;
+    @apply absolute right-0 flex items-center h-full text-sm text-white px-3 py-1;
   }
 }
 
@@ -42,6 +43,10 @@
         &:last-child {
           border-radius: 0 0 10px 10px;
         }
+      }
+
+      &--info {
+        color: $darkGrey;
       }
     }
 
