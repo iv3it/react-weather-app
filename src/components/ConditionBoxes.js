@@ -1,76 +1,74 @@
 import '../styles/conditionBoxes.scss'
-import iconHumidity from "../assets/icons/humidity.png";
-import iconPressure from "../assets/icons/pressure.png";
-import iconSunrise from "../assets/icons/sunrise.png";
-import iconSunset from "../assets/icons/sunset.png";
-import iconWind from "../assets/icons/wind.png";
-import iconWindDirection from "../assets/icons/wind-direction.png";
-import iconRainChance from "../assets/icons/umbrella.png";
-import iconUVIndex from "../assets/icons/sunglasses.png";
-import iconVisibility from "../assets/icons/visibility.png";
-import iconCloudCover from "../assets/icons/clouds.png";
-import iconFeelsLike from "../assets/icons/thermometer.png"
-
+import { useGetDailyAndHourlyQuery } from '../features/api/apiSlice'
+import { useSelector } from 'react-redux';
 
 const ConditionBoxes = () => {
+  const { lat, lon } = useSelector(state => state.coordinates);
+  const {
+    data,
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  } = useGetDailyAndHourlyQuery({lat, lon});
+
   return ( 
-    <section className="conditionBoxes">
-      <div className="conditionBox">
-        <img src={iconHumidity} alt="icon" className="conditionBox__icon"/>
-        <p className="conditionBox__value">36%</p>
-        <p className="conditionBox__description">Humidity</p>
-      </div>
-      <div className="conditionBox">
-        <img src={iconPressure} alt="icon" className="conditionBox__icon"/>
-        <p className="conditionBox__value">1024 hPa</p>
-        <p className="conditionBox__description">Air pressure</p>
-      </div>
-      <div className="conditionBox">
-        <img src={iconSunrise} alt="icon" className="conditionBox__icon"/>
-        <p className="conditionBox__value">05:22</p>
-        <p className="conditionBox__description">Sunrise</p>
-      </div>
-      <div className="conditionBox">
-        <img src={iconSunset} alt="icon" className="conditionBox__icon"/>
-        <p className="conditionBox__value">20:33</p>
-        <p className="conditionBox__description">Sunset</p>
-      </div>
-      <div className="conditionBox">
-        <img src={iconWind} alt="icon" className="conditionBox__icon"/>
-        <p className="conditionBox__value">24 km/h</p>
-        <p className="conditionBox__description">Wind speed</p>
-      </div>
-      <div className="conditionBox">
-        <img src={iconWindDirection} alt="icon" className="conditionBox__icon"/>
-        <p className="conditionBox__value">SW</p>
-        <p className="conditionBox__description">Wind direction</p>
-      </div>
-      <div className="conditionBox">
-        <img src={iconRainChance} alt="icon" className="conditionBox__icon"/>
-        <p className="conditionBox__value">19%</p>
-        <p className="conditionBox__description">Chance of rain</p>
-      </div>
-      <div className="conditionBox">
-        <img src={iconUVIndex} alt="icon" className="conditionBox__icon"/>
-        <p className="conditionBox__value">6</p>
-        <p className="conditionBox__description">UV Index</p>
-      </div>
-      <div className="conditionBox">
-        <img src={iconVisibility} alt="icon" className="conditionBox__icon"/>
-        <p className="conditionBox__value">20km</p>
-        <p className="conditionBox__description">Visibility</p>
-      </div>
-      <div className="conditionBox">
-        <img src={iconCloudCover} alt="icon" className="conditionBox__icon"/>
-        <p className="conditionBox__value">46%</p>
-        <p className="conditionBox__description">Cloud Cover</p>
-      </div>
-      {/* <div className="conditionBox">
-        <img src={iconFeelsLike} alt="icon" className="conditionBox__icon"/>
-        <p className="conditionBox__value">19&deg;</p>
-        <p className="conditionBox__description">Feels like</p>
-      </div> */}
-    </section>
+    <>
+    {data && 
+      <section className="conditionBoxes">
+        <div className="conditionBox">
+          <img src="/icons/humidity.png" alt="icon" className="conditionBox__icon"/>
+          <p className="conditionBox__value">{data.current.humidity}%</p>
+          <p className="conditionBox__description">Humidity</p>
+        </div>
+        <div className="conditionBox">
+          <img src="/icons/pressure.png" alt="icon" className="conditionBox__icon"/>
+          <p className="conditionBox__value">{data.current.pressure} hPa</p>
+          <p className="conditionBox__description">Air pressure</p>
+        </div>
+        <div className="conditionBox">
+          <img src="/icons/sunrise.png" alt="icon" className="conditionBox__icon"/>
+          <p className="conditionBox__value">{data.current.sunrise}</p>
+          <p className="conditionBox__description">Sunrise</p>
+        </div>
+        <div className="conditionBox">
+          <img src="/icons/sunset.png" alt="icon" className="conditionBox__icon"/>
+          <p className="conditionBox__value">{data.current.sunset}</p>
+          <p className="conditionBox__description">Sunset</p>
+        </div>
+        <div className="conditionBox">
+          <img src="/icons/wind.png" alt="icon" className="conditionBox__icon"/>
+          <p className="conditionBox__value">{data.current.wind_speed} m/s</p>
+          <p className="conditionBox__description">Wind speed</p>
+        </div>
+        <div className="conditionBox">
+          <img src="/icons/wind-direction.png" alt="icon" className="conditionBox__icon"/>
+          <p className="conditionBox__value">{data.current.wind_deg}</p>
+          <p className="conditionBox__description">Wind direction</p>
+        </div>
+        <div className="conditionBox">
+          <img src="/icons/thermometer.png" alt="icon" className="conditionBox__icon"/>
+          <p className="conditionBox__value">{data.current.dew_point}</p>
+          <p className="conditionBox__description">Dew point</p>
+        </div>
+        <div className="conditionBox">
+          <img src="/icons/sunglasses.png" alt="icon" className="conditionBox__icon"/>
+          <p className="conditionBox__value">{data.current.uvi}</p>
+          <p className="conditionBox__description">UV Index</p>
+        </div>
+        <div className="conditionBox">
+          <img src="/icons/visibility.png" alt="icon" className="conditionBox__icon"/>
+          <p className="conditionBox__value">{data.current.visibility} km</p>
+          <p className="conditionBox__description">Visibility</p>
+        </div>
+        <div className="conditionBox">
+          <img src="/icons/clouds.png" alt="icon" className="conditionBox__icon"/>
+          <p className="conditionBox__value">{data.current.clouds}%</p>
+          <p className="conditionBox__description">Cloud Cover</p>
+        </div>
+      </section>
+    }
+    </>
   );
 }
 

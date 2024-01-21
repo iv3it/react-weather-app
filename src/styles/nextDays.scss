@@ -5,11 +5,20 @@
   background-color: $darkGrey;
 
   .nextDay {
-    @apply flex place-content-between;
+    @apply grid;
+    grid-template-columns: repeat(4, 1fr);
     border-radius: 10px;
 
     &__holder {
-      @apply flex items-center shrink-0 mx-2;
+      @apply flex items-center shrink-0 mx-2 justify-center;
+
+      &:first-of-type {
+        @apply justify-start;
+      }
+
+      &:last-of-type {
+        @apply justify-end;
+      }
     }
 
     &__day {
@@ -25,7 +34,7 @@
       object-fit: contain;
     }
 
-    &__rainChance {
+    &__humidity {
       font-size: 0.9rem;
       font-weight: 500;
       margin-left: 0.25rem;
@@ -43,21 +52,5 @@
       }
     }
 
-  }
-
-  &__button {
-    display: block;
-    font-size: 0.9rem;
-    margin: 1rem auto 0 auto;
-    padding: 0.5rem 1rem;
-    border-radius: 30px;
-    background-color: $darkBlue;
-    color: $white;
-    transition: 0.15s ease-in-out;
-
-    &:hover {
-      background-color: $blue;
-      color: $white;
-    }
   }
 }
