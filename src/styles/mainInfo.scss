@@ -1,7 +1,7 @@
 @import "./variables.scss";
 
 .mainInfo {
-  @apply my-8 items-center grid grid-cols-1 lg:grid-cols-2;
+  @apply relative my-8 items-center grid grid-cols-1 lg:grid-cols-2;
 
   &__city {
     @apply text-3xl md:text-6xl;
@@ -36,5 +36,46 @@
     width: auto;
     object-fit: contain;
     margin: 2rem 0;
+  }
+
+  &__heart {
+    position: absolute;
+    display: block;
+    height: 2rem;
+    width: 2rem;
+    right: 1rem;
+    top: 1rem;
+
+    &__icon {
+      width: 2rem;
+      height: 2rem;
+      
+      &.heartbeatAnimation {
+        animation: heartbeatAnimation 0.5s ease-in-out;
+        transform-origin: center center;  
+      }
+
+      &.filled {
+        fill: #fff;
+      }
+    }
+  }
+}
+
+@keyframes heartbeatAnimation {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+  75% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
   }
 }

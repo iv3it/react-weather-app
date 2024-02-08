@@ -1,7 +1,6 @@
 import '../styles/searchBar.scss'
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useLazyGetCurrentDataQuery, useLazyGetDailyAndHourlyQuery } from '../features/api/apiSlice'
 import { setLatLon } from '../features/coordinatesReducer'
 
 const SearchBar = () => {
@@ -9,9 +8,6 @@ const SearchBar = () => {
   const apiKey = "1413ad5b934c2111a7202966316a7ccc";
   const [searchValue, setSearchValue] = useState("");
   const [suggestions, setSuggestions] = useState(null);
-
-  const [getDailyAndHourly, { data2, isLoading2, isSuccess2, isError2, error2 }] = useLazyGetDailyAndHourlyQuery();
-  const [getCurrentData, { data, isLoading, isSuccess, isError, error }] = useLazyGetCurrentDataQuery();
 
   let getSuggestions = (input) => {
     if(input.length >= 2) {
@@ -35,8 +31,6 @@ const SearchBar = () => {
   }
 
   let getWeatherData = async(lat, lon) => {
-    await getCurrentData({lat, lon}); 
-    await getDailyAndHourly({lat, lon});
     dispatch(setLatLon({lat, lon}));
     setSuggestions(null); 
     setSearchValue("");
