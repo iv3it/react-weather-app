@@ -17,8 +17,15 @@ const SearchBar = () => {
     if(input.length >= 2) {
       setTimeout(() => {
         fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=8&appid=${apiKey}`)
-        .then((result) => result.json())
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+        })
         .then((data) => (setSuggestions(data)))
+        .catch((error) => {
+          console.log(error);
+        });
       }, 500)
     }
 
@@ -30,7 +37,7 @@ const SearchBar = () => {
   let getWeatherData = async(lat, lon) => {
     await getCurrentData({lat, lon}); 
     await getDailyAndHourly({lat, lon});
-    dispatch(setLatLon({lat, lon}))
+    dispatch(setLatLon({lat, lon}));
     setSuggestions(null); 
     setSearchValue("");
   }
@@ -45,7 +52,7 @@ const SearchBar = () => {
       <div className='suggestionBox'>
         <ul className='suggestionBox__list'>
           {suggestions && suggestions.map((item, index) => (
-            <li onClick={() => {getWeatherData(item.lat, item.lon);}} className="suggestionBox__list__item" key={index}>{item.name}</li>
+            <li onClick={() => {getWeatherData(item.lat, item.lon);}} className="suggestionBox__list__item" key={index}>{item.name}, <span className='additionalInfo'>{item.state}, {item.country}</span></li>
           ))}
         </ul>
         {!suggestions && searchValue.length >= 2 &&

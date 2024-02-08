@@ -25,12 +25,15 @@
   color: $black;
   background-color: $milk;
   top: calc(100% + 1rem);
+  z-index: 1;
 
   &__list {
 
     &__item {
       @apply py-2 px-2;
       cursor: pointer;
+      color: $darkGrey;
+      font-weight: 500;
 
       &:hover {
         background-color: $blue;
@@ -43,10 +46,16 @@
         &:last-child {
           border-radius: 0 0 10px 10px;
         }
+
+        .additionalInfo {
+          color: $milk;
+        }
       }
 
-      &--info {
-        color: $darkGrey;
+      .additionalInfo {
+        font-weight: 400;
+        color: $grey;
+        font-style: italic;
       }
     }
 
