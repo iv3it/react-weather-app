@@ -1,4 +1,5 @@
 import '../styles/nextDays.scss'
+import Loading from '../components/Loading';
 import { useGetDailyAndHourlyQuery } from '../features/api/apiSlice'
 import { useSelector } from 'react-redux';
 
@@ -14,6 +15,9 @@ const NextDays = () => {
 
   return ( 
     <>
+    {isLoading && 
+      <Loading />
+    }
     {data && 
       <section className="nextDays">
         {data.daily.map((item, index) =>

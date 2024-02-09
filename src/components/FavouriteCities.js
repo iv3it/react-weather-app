@@ -1,4 +1,5 @@
 import '../styles/favouriteCities.scss'
+import Loading from '../components/Loading';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useLazyGetCurrentDataQuery } from '../features/api/apiSlice'
@@ -46,6 +47,9 @@ const FavouriteCities = () => {
       </div>
       <p className="favouriteCities__description">Add favourite city by clicking on heart.</p>
 
+      {isLoading && 
+        <Loading />
+      }
       {favCities && favCities.favouriteCitiesData.length > 0 ? favCities.favouriteCitiesData.map((item, index) =>
         <div className="favouriteCities__box" key={index} onClick={() => dispatch(setLatLon({lat: item.coord.lat, lon: item.coord.lon}))}>
           <h3 className='favouriteCities__box__name'>{item.name}</h3>

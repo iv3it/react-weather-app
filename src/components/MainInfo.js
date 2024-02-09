@@ -1,4 +1,5 @@
 import '../styles/mainInfo.scss'
+import Loading from '../components/Loading';
 import { useGetCurrentDataQuery } from '../features/api/apiSlice'
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -52,6 +53,9 @@ const MainInfo = () => {
 
   return ( 
     <>
+    {isLoading && 
+      <Loading />
+    }
     {data &&
       <section className='mainInfo'>        
         <div className='flex flex-col items-center lg:items-start'>

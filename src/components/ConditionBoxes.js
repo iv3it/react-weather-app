@@ -1,4 +1,5 @@
 import '../styles/conditionBoxes.scss'
+import Loading from '../components/Loading';
 import { useGetDailyAndHourlyQuery } from '../features/api/apiSlice'
 import { useSelector } from 'react-redux';
 
@@ -14,6 +15,9 @@ const ConditionBoxes = () => {
 
   return ( 
     <>
+    {isLoading && 
+      <Loading />
+    }
     {data && 
       <section className="conditionBoxes">
         <div className="conditionBox">
