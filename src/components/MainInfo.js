@@ -32,20 +32,20 @@ const MainInfo = () => {
     }
   }, [data])
 
-  let toggleFav = (lat, lon) => {
+  let toggleFav = (lat, lon, id) => {
     if(isCurrentCityFav) {
-      let newFavCities = favCities.favouriteCities.filter(e => (e.lat !== lat) && (e.lon !== lon));
+      let newFavCities = favCities.favouriteCities.filter(e => (e.id !== id));
       localStorage.setItem('favCities', JSON.stringify(newFavCities));
 
-      dispatch(deleteFavCity({lat: lat, lon: lon}));
+      dispatch(deleteFavCity({id: id}));
       setIsCurrentCityFav(false);
       setAddingToFav(false);
     } else {
       let newFavCities = [...favCities.favouriteCities];
-      newFavCities.push({lat: lat, lon:lon});
+      newFavCities.push({lat: lat, lon:lon, id: id});
       localStorage.setItem('favCities', JSON.stringify(newFavCities));
       
-      dispatch(addFavCity({lat: lat, lon: lon}));
+      dispatch(addFavCity({lat: lat, lon: lon, id: id}));
       setIsCurrentCityFav(true);
       setAddingToFav(true);
     }
@@ -59,7 +59,7 @@ const MainInfo = () => {
     {data &&
       <section className='mainInfo'>        
         <div className='flex flex-col items-center lg:items-start'>
-          <button onClick={() => toggleFav(data.coord.lat, data.coord.lon)} className="mainInfo__heart">
+          <button onClick={() => toggleFav(data.coord.lat, data.coord.lon, data.id)} className="mainInfo__heart">
             <svg className={`${isCurrentCityFav ? "filled" : ""} ${isCurrentCityFav && addingToFav ? "heartbeatAnimation" : ""} mainInfo__heart__icon`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g id="SVGRepo_bgCarrier" strokeWidth="0"/>
               <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"/>

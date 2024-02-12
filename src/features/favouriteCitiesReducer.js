@@ -13,10 +13,10 @@ export const favouriteCitiesSlice = createSlice({
       state.favouriteCitiesData = [...action.payload];
     },
     addFavCity: (state, action) => {
-      state.favouriteCities.push({lat: action.payload.lat, lon: action.payload.lon});
+      state.favouriteCities.push({lat: action.payload.lat, lon: action.payload.lon, id: action.payload.id});
     },
     deleteFavCity: (state, action) => {
-      state.favouriteCities = state.favouriteCities.filter(e => (e.lat !== action.payload.lat) && (e.lon !== action.payload.lon));
+      state.favouriteCities = state.favouriteCities.filter(e => (e.id !== action.payload.id));
     },
   },
 })
