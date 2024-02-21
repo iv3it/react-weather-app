@@ -1,6 +1,6 @@
 import '../styles/mainInfo.scss'
 import Loading from '../components/Loading';
-import { useGetCurrentDataQuery } from '../features/api/apiSlice'
+import { useLazyGetCurrentDataQuery } from '../features/api/apiSlice'
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { addFavCity, deleteFavCity } from '../features/favouriteCitiesReducer'
@@ -9,15 +9,16 @@ const MainInfo = () => {
   const dispatch = useDispatch();
   const favCities = useSelector(state => state.favouriteCities);
   const { lat, lon } = useSelector(state => state.coordinates);
-  const {
-    data,
-    isLoading,
-    isSuccess,
-    isError,
-    error
-  } = useGetCurrentDataQuery({lat, lon});
+  const [getCurrentData, { data, isLoading, isSuccess, isError, error }] = useLazyGetCurrentDataQuery({lat, lon});
+
   let [isCurrentCityFav, setIsCurrentCityFav] = useState(false);
   let [addingToFav, setAddingToFav] = useState(false);
+
+  useEffect(() => {
+    if(lat && lon) {
+      getCurrentData({lat: lat, lon: lon});
+    }
+  }, [lat, lon])
 
   useEffect(() => {
     if(data) {

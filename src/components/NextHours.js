@@ -1,17 +1,18 @@
 import '../styles/nextHours.scss';
 import Loading from '../components/Loading';
-import { useGetDailyAndHourlyQuery } from '../features/api/apiSlice'
+import { useLazyGetDailyAndHourlyQuery } from '../features/api/apiSlice'
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const NextHours = () => {
   const { lat, lon } = useSelector(state => state.coordinates);
-  const {
-    data,
-    isLoading,
-    isSuccess,
-    isError,
-    error
-  } = useGetDailyAndHourlyQuery({lat, lon});
+  const [getDailyAndHourlyQuery, { data, isLoading, isSuccess, isError, error }] = useLazyGetDailyAndHourlyQuery({lat, lon});
+
+  useEffect(() => {
+    if(lat && lon) {
+      getDailyAndHourlyQuery({lat: lat, lon: lon});
+    }
+  }, [lat, lon])
 
   return ( 
     <>
